@@ -26,9 +26,6 @@ public class SetTitleFragment extends Fragment {
         //加载布局文件
         view=inflater.inflate(R.layout.title_layout,container,false);
         MainActivity activity=(MainActivity)getActivity();
-//        titles = activity.getTitles();
-//        // 从activity中获取titles和details
-//        details=activity.getDetails();
         videos = activity.getVideos();
         if (view!=null){
             init();
