@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
     tools:context=".StartActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#BE2121">
+        android:background="#075366">
 
         <TextView
             android:id="@+id/tv"
@@ -30,7 +29,7 @@
             android:layout_height="726dp"
             android:layout_alignParentTop="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="61dp"
-            android:src="@drawable/adpic" />
+            android:layout_marginTop="50dp"
+            android:src="@drawable/start" />
     </RelativeLayout>
 </LinearLayout>

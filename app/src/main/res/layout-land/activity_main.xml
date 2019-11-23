@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:baselineAligned="false"
     android:orientation="horizontal"
-    tools:context=".MainActivity"
-    android:baselineAligned="false">
+    tools:context=".MainActivity">
     <!--标题-->
     <FrameLayout
         android:id="@+id/settitle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="6"/>
+        android:layout_weight="8" />
     <!--内容-->
     <FrameLayout
         android:id="@+id/setcontent"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="2"/>
+        android:layout_weight="2" />
 </LinearLayout>

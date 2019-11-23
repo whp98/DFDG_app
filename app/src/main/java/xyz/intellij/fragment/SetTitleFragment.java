@@ -16,42 +16,35 @@ import java.util.List;
 
 public class SetTitleFragment extends Fragment {
     private View view;
-//    private String[] titles;
-//    private String[][] details;
+
     private List<Video> videos;
     private ListView listView;
-    //是否是双页模式。如果一个Activity中包含了两个Fragment，就是双页模式。
     private boolean isTwoPane;
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState){
-        //加载布局文件
-        view=inflater.inflate(R.layout.title_layout,container,false);
-        MainActivity activity=(MainActivity)getActivity();
+
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.title_layout, container, false);
+        MainActivity activity = (MainActivity) getActivity();
         videos = activity.getVideos();
-        if (view!=null){
+        if (view != null) {
             init();
         }
 
-        //判断是是不是分屏
-        if (((MainActivity)getActivity()).findViewById(R.id.setcontent) != null) {
+        if (((MainActivity) getActivity()).findViewById(R.id.setcontent) != null) {
             isTwoPane = true;
         } else {
             isTwoPane = false;
         }
-        // 为listview添加监听器
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (isTwoPane) {
-                    // 通过activity实例获取另一个Fragment（右侧Fragment）对象
-                    SetContentFragment detail = (SetContentFragment)((MainActivity)getActivity()).getSupportFragmentManager().findFragmentById(R.id.setcontent);
+                    SetContentFragment detail = (SetContentFragment) ((MainActivity) getActivity()).getSupportFragmentManager().findFragmentById(R.id.setcontent);
 
-                    // 设置获取到的Fragment对象的文字内容
                     detail.setText(videos.get(i));
                 } else {
                     Intent intent = new Intent(getActivity().getApplicationContext(), PlayVideoActivity.class);
-                    //可以携带数据
                     Bundle data = new Bundle();
-                    data.putSerializable("data",videos.get(i));
+                    data.putSerializable("data", videos.get(i));
                     intent.putExtras(data);
                     startActivity(intent);
                 }
@@ -62,12 +55,10 @@ public class SetTitleFragment extends Fragment {
     }
 
     private void init() {
-        // 获取ListView（listView）实例
-        listView = (ListView)view.findViewById(R.id.titlelist);
+        listView = (ListView) view.findViewById(R.id.titlelist);
 
 
         if (videos != null) {
-            // 为listView设置adapter
             listView.setAdapter(new MyAdapter());
         }
     }
@@ -91,12 +82,9 @@ public class SetTitleFragment extends Fragment {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            // 加载listView每一项的布局
             view = View.inflate(getActivity(), R.layout.title_item_layout, null);
 
-            // 获取title_item_layout中TextView的实例
-            TextView titletext = (TextView)view.findViewById(R.id.titles);
-            // 为该TextView设置文字为titles中的第i项
+            TextView titletext = (TextView) view.findViewById(R.id.titles);
             titletext.setText(videos.get(i).toString());
             return view;
         }

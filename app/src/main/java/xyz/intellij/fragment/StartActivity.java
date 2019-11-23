@@ -23,6 +23,7 @@ public class StartActivity extends Activity implements View.OnClickListener {
     private Runnable runnable;
     String skip_ad;
     Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -35,7 +36,7 @@ public class StartActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_start);
 
         initView();
-        intent= new Intent(StartActivity.this, MainActivity.class);
+        intent = new Intent(StartActivity.this, MainActivity.class);
         timer.schedule(task, 1000, 1000);
         handler = new Handler();
         handler.postDelayed(runnable = new Runnable() {
@@ -48,8 +49,8 @@ public class StartActivity extends Activity implements View.OnClickListener {
     }
 
     private void initView() {
-        tv = findViewById(R.id.tv);//跳过
-        tv.setOnClickListener(this);//跳过监听
+        tv = findViewById(R.id.tv);
+        tv.setOnClickListener(this);
     }
 
     TimerTask task = new TimerTask() {
@@ -59,15 +60,16 @@ public class StartActivity extends Activity implements View.OnClickListener {
                 @Override
                 public void run() {
                     recLen--;
-                    tv.setText(skip_ad+recLen);
+                    tv.setText(skip_ad + recLen);
                     if (recLen < 0) {
                         timer.cancel();
-                        tv.setVisibility(View.GONE);//倒计时到0隐藏字体
+                        tv.setVisibility(View.GONE);
                     }
                 }
             });
         }
     };
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

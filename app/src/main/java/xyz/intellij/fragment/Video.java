@@ -2,7 +2,7 @@ package xyz.intellij.fragment;
 
 import java.io.Serializable;
 
-public class Video  implements Serializable {
+public class Video implements Serializable {
     public Integer id;
     public String name;
     public String contents;
@@ -19,6 +19,6 @@ public class Video  implements Serializable {
 
     @Override
     public String toString() {
-        return  name+"\n"+len;
+        return name + "  " + len;
     }
 }
