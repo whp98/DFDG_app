@@ -1,4 +1,4 @@
-# 学习强国app开发
+# 东方大国app开发
 
 # 开发任务
 
@@ -29,10 +29,246 @@
 
 - [x] 重新进入详情Activity，显示上次分值，并可修改打分
 
-## 实现步骤
+# 成果展示
 
-### 一、设计着陆页
+图标页  
+![](img/图标页.png)
 
-着陆页比较简单我们直接使用上一个app开发的技巧进行模仿只是修改主题就可完成
+着陆页  
+![](img/着陆页.png)
 
-主要在start_activate
+竖屏列表  
+![](img/列表页.png)
+
+竖屏播放页面  
+![](img/竖屏播放.png)
+
+横屏播放  
+![](img/播放页.png)
+
+列表滚动  
+![](img/列表滚动.png)
+
+# 实现步骤
+
+## 设计着陆页
+
+着陆页的实现比较简单，比较核心的部分如下：  
+定时任务更新textview
+```
+TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable() { // UI thread
+                @Override
+                public void run() {
+                    recLen--;
+                    tv.setText(skip_ad+recLen);
+                    if (recLen < 0) {
+                        timer.cancel();
+                        tv.setVisibility(View.GONE);//倒计时到0隐藏字体
+                    }
+                }
+            });
+        }
+    };
+```
+设定监听器，启动MainActivity
+```
+public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv:
+                startActivity(intent);
+                finish();
+                if (runnable != null) {
+                    handler.removeCallbacks(runnable);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+```
+## MainActivity实现
+
+MainActivity主要就是启动一个frament实例，然后让其余的任务在fragment中完成  
+关键部分：  
+取得数据
+```
+for (int i=0;i<names.length;i++){
+            videos.add(new Video(i+1,names[i],contents[i],len[i],url[i]));
+        }
+```
+创建fragment实例并且加载
+
+```
+        //创建2个Fragment的实例
+        SetTitleFragment TitleFragment = new SetTitleFragment();
+        SetContentFragment ContentFragment = new SetContentFragment();
+
+        //获取Fragment事务
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+
+        //添加Fragment
+        transaction.replace(R.id.settitle,TitleFragment);
+        if (findViewById(R.id.setcontent)!=null) {
+            transaction.replace(R.id.setcontent,ContentFragment);
+        }
+        //提交事务
+        transaction.commit();
+```
+# 用于展示列表的fragment：SetTitleFragment
+主要的工作就是显示列表，数据从MainActivity获取，然后在设置另一个fragment的参数，将被选中的项目传过去，
+并且在不同的屏幕状态下采取不同的动作  
+关键部分  
+获取数据
+```
+        //从MainActivity获取数据
+        MainActivity activity=(MainActivity)getActivity();
+        videos = activity.getVideos();
+```
+判断横屏竖屏
+
+```
+//判断是是不是横屏布局
+        if (((MainActivity)getActivity()).findViewById(R.id.setcontent) != null) {
+            isTwoPane = true;
+        } else {
+            isTwoPane = false;
+        }
+```
+
+创建竖屏展示页面发送数据
+
+```
+Intent intent = new Intent(getActivity().getApplicationContext(), PlayVideoActivity.class);
+                    //可以携带数据
+                    Bundle data = new Bundle();
+                    data.putSerializable("data",videos.get(i));
+                    intent.putExtras(data);
+                    startActivity(intent);
+```
+
+实现adapter的部分
+
+```
+public View getView(int i, View view, ViewGroup viewGroup) {
+            // 加载listView每一项的布局
+            view = View.inflate(getActivity(), R.layout.title_item_layout, null);
+
+            // 获取title_item_layout中TextView的实例
+            TextView titletext = (TextView)view.findViewById(R.id.titles);
+            // 为该TextView设置文字为titles中的第i项
+            titletext.setText(videos.get(i).toString());
+            return view;
+        }
+```
+
+## SetContentFragment功能较多
+主要实现视频播放，视频评价，视频详情内容展示
+
+视频播放内容
+
+```
+private void initVideoPath(Video in){
+        videoView.setVideoURI(Uri.parse(in.url));//指定视频文件路径
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);//让电影循环播放
+            }
+        });
+    }
+```
+
+视频评价内容存储和设定
+```
+ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                if (fromUser){
+                    setRate(rating,id_r);
+                }
+            }
+        });
+        
+ private float getRate(int id){
+        SharedPreferences sp = this.getActivity().getSharedPreferences("rates", Context.MODE_PRIVATE);
+        return sp.getFloat(""+id,0);
+    }
+
+    private void setRate(float rate,int id){
+        SharedPreferences sp = this.getActivity().getSharedPreferences("rates", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();//获取编辑器
+        editor.putFloat(""+id,rate);
+        editor.apply();//提交修改
+    } 
+```
+
+视频详情内容展示
+
+```
+public void setText(Video text) {
+        this.id_r=text.id;
+        // 设置TextView的文字
+        initVideoPath(text);
+        text1.setText(text.contents);
+        ratingBar.setRating(getRate(text.id));
+    }
+```
+## 存储数据的实体类
+实现了存储接口可以使用Bundle传输
+
+```
+public class Video  implements Serializable {
+    public Integer id;
+    public String name;
+    public String contents;
+    public String len;
+    public String url;
+
+    public Video(Integer id, String name, String contents, String len, String url) {
+        this.id = id;
+        this.name = name;
+        this.contents = contents;
+        this.len = len;
+        this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return  name+"\n"+len;
+    }
+}
+```
+
+## 视频单独播放
+这里有Bundle的数据接收
+```
+Intent intent = this.getIntent();
+            Video video=(Video) intent.getSerializableExtra("data");
+            SetContentFragment ContentFragment = new SetContentFragment();
+            ContentFragment.setDef(video);
+```
+
+## manifests权限设置
+
+```
+<uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```
+
+## 布局文件
+
+activity_main主要有横竖两个，横的布局显示两个framelayout而竖屏显示一个  
+activity_play_video主要目的是中间嵌套fragmenr所以有有一个framelayout  
+activity_start显示的是落地页，中间有图片展示  
+content_layout显示的是视频的内容，中间使用滚动和约束布局实现  
+title_item_layout主要是Textview用于展示列表  
+title_layout中间有一个ListView用来展示title
+
+
+
