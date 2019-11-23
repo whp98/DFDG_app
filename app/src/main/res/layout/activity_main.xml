@@ -10,7 +10,7 @@
 <!--标题-->
     <FrameLayout
         android:id="@+id/settitle"
-        android:layout_width="69dp"
+        android:layout_width="48dp"
         android:layout_height="match_parent"
         android:layout_weight="1"></FrameLayout>
 <!--内容-->

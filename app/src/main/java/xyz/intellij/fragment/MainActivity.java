@@ -21,7 +21,7 @@ public class MainActivity extends FragmentActivity{
 //    private String titles[] = {"标题一","标题二","标题三"};
 //    private String details[][] = {{"标题一","标题一的内容"},{"标题二","标题二的内容"},{"标题三","标题三的内容"}};
     //获取video列表的方法
-    public List<Video> getVides() {
+    public List<Video> getVideos() {
         return videos;
     }
 //    //获取标题和内容

@@ -26,7 +26,7 @@ public class setTitleFragment extends Fragment {
 //        titles = activity.getTitles();
 //        // 从activity中获取titles和details
 //        details=activity.getDetails();
-        videos = activity.getVides();
+        videos = activity.getVideos();
         if (view!=null){
             init();
         }
