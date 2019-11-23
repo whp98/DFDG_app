@@ -27,7 +27,7 @@ public class setContentFragment extends Fragment {
         }
 
         // 设置初始化显示文字为activity中details的第一项
-        setText(((MainActivity)getActivity()).getDetails()[0]);
+        setText(((MainActivity)getActivity()).getVides().get(0));
 
         return view;
     }
@@ -38,9 +38,9 @@ public class setContentFragment extends Fragment {
         text2 = (TextView)view.findViewById(R.id.show_title);
 
     }
-    public void setText(String[] text) {
+    public void setText(Video text) {
         // 设置两个TextView的文字
-        text1.setText(text[0]);
-        text2.setText(text[1]);
+        text1.setText(text.name);
+        text2.setText(text.contents);
     }
 }
