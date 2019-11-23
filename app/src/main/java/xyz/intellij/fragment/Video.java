@@ -1,6 +1,8 @@
 package xyz.intellij.fragment;
 
-public class Video {
+import java.io.Serializable;
+
+public class Video  implements Serializable {
     public Integer id;
     public String name;
     public String contents;

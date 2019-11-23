@@ -1,5 +1,6 @@
 package xyz.intellij.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.List;
 
@@ -19,6 +22,8 @@ public class setTitleFragment extends Fragment {
 //    private String[][] details;
     private List<Video> videos;
     private ListView listView;
+    //是否是双页模式。如果一个Activity中包含了两个Fragment，就是双页模式。
+    private boolean isTwoPane;
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState){
         //加载布局文件
         view=inflater.inflate(R.layout.title_layout,container,false);
@@ -31,15 +36,30 @@ public class setTitleFragment extends Fragment {
             init();
         }
 
+        //判断是是不是分屏
+        if (((MainActivity)getActivity()).findViewById(R.id.setcontent) != null) {
+            isTwoPane = true;
+        } else {
+            isTwoPane = false;
+        }
         // 为listview添加监听器
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // 通过activity实例获取另一个Fragment（右侧Fragment）对象
-                setContentFragment detail = (setContentFragment)((MainActivity)getActivity()).getSupportFragmentManager().findFragmentById(R.id.setcontent);
+                if (isTwoPane) {
+                    // 通过activity实例获取另一个Fragment（右侧Fragment）对象
+                    setContentFragment detail = (setContentFragment)((MainActivity)getActivity()).getSupportFragmentManager().findFragmentById(R.id.setcontent);
 
-                // 设置获取到的Fragment对象的文字内容
-                detail.setText(videos.get(i));
+                    // 设置获取到的Fragment对象的文字内容
+                    detail.setText(videos.get(i));
+                } else {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), PlayVideoActivity.class);
+                    //可以携带数据
+                    Bundle data = new Bundle();
+                    data.putSerializable("data",videos.get(i));
+                    intent.putExtras(data);
+                    startActivity(intent);
+                }
 
             }
         });

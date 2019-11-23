@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".MainActivity"
-    android:baselineAligned="false">
-    <!--标题/内容-->
+    android:orientation="vertical"
+    tools:context=".PlayVideoActivity">
+    <!--内容-->
     <FrameLayout
-        android:id="@+id/settitle"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="2"/>
-
+        android:id="@+id/setcontent1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="6"/>
 </LinearLayout>

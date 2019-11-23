@@ -7,11 +7,16 @@
     android:orientation="horizontal"
     tools:context=".MainActivity"
     android:baselineAligned="false">
-    <!--标题/内容-->
+    <!--标题-->
     <FrameLayout
         android:id="@+id/settitle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_weight="6"/>
+    <!--内容-->
+    <FrameLayout
+        android:id="@+id/setcontent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="2"/>
-
 </LinearLayout>

@@ -55,9 +55,9 @@ public class MainActivity extends FragmentActivity{
 
         //添加Fragment
         transaction.replace(R.id.settitle,TitleFragment);
-        transaction.replace(R.id.setcontent,ContentFragment);
-
-
+        if (findViewById(R.id.setcontent)!=null) {
+            transaction.replace(R.id.setcontent,ContentFragment);
+        }
         //提交事务
         transaction.commit();
 
