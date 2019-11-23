@@ -11,12 +11,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import java.util.List;
 
-public class setTitleFragment extends Fragment {
+public class SetTitleFragment extends Fragment {
     private View view;
 //    private String[] titles;
 //    private String[][] details;
@@ -48,7 +46,7 @@ public class setTitleFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (isTwoPane) {
                     // 通过activity实例获取另一个Fragment（右侧Fragment）对象
-                    setContentFragment detail = (setContentFragment)((MainActivity)getActivity()).getSupportFragmentManager().findFragmentById(R.id.setcontent);
+                    SetContentFragment detail = (SetContentFragment)((MainActivity)getActivity()).getSupportFragmentManager().findFragmentById(R.id.setcontent);
 
                     // 设置获取到的Fragment对象的文字内容
                     detail.setText(videos.get(i));

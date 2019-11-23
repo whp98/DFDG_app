@@ -17,7 +17,7 @@ import android.widget.VideoView;
 import androidx.fragment.app.Fragment;
 
 
-public class setContentFragment extends Fragment implements View.OnClickListener {
+public class SetContentFragment extends Fragment implements View.OnClickListener {
     private View view;
     private TextView text1;
     private Button btnPlay,btnPause,btnReplay;

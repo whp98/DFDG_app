@@ -19,6 +19,6 @@ public class Video  implements Serializable {
 
     @Override
     public String toString() {
-        return  name+"-"+len;
+        return  name+"\n"+len;
     }
 }

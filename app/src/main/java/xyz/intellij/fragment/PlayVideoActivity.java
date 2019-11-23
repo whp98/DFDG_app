@@ -1,6 +1,5 @@
 package xyz.intellij.fragment;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,6 +13,7 @@ public class PlayVideoActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_AppCompat_NoActionBar);
         setContentView(R.layout.activity_play_video);
 
         /**
@@ -31,7 +31,7 @@ public class PlayVideoActivity extends FragmentActivity {
         {
             Intent intent = this.getIntent();
             Video video=(Video) intent.getSerializableExtra("data");
-            setContentFragment ContentFragment = new setContentFragment();
+            SetContentFragment ContentFragment = new SetContentFragment();
             ContentFragment.setDef(video);
             //获取Fragment事务
             FragmentManager fragmentManager = getSupportFragmentManager();

@@ -3,7 +3,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -31,6 +30,7 @@ public class MainActivity extends FragmentActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppTheme);
         //创建对象列表
         names = getResources().getStringArray(R.array.video_names);
         contents = getResources().getStringArray(R.array.video_contents);
@@ -45,8 +45,8 @@ public class MainActivity extends FragmentActivity{
 
 
         //创建2个Fragment的实例
-        setTitleFragment TitleFragment = new setTitleFragment();
-        setContentFragment ContentFragment = new setContentFragment();
+        SetTitleFragment TitleFragment = new SetTitleFragment();
+        SetContentFragment ContentFragment = new SetContentFragment();
 
         //获取Fragment事务
         FragmentManager fragmentManager = getSupportFragmentManager();
