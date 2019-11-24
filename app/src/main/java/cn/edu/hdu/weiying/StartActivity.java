@@ -1,6 +1,4 @@
-package xyz.intellij.fragment;
-
-import androidx.appcompat.app.AppCompatActivity;
+package cn.edu.hdu.weiying;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import cn.edu.hdu.weiying.R;
 
 public class StartActivity extends Activity implements View.OnClickListener {
     //设置倒计时

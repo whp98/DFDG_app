@@ -1,4 +1,4 @@
-package xyz.intellij.fragment;
+package cn.edu.hdu;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package xyz.intellij.fragment;
+package cn.edu.hdu.weiying;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.fragment.app.Fragment;
+
+import cn.edu.hdu.weiying.R;
 
 
 public class SetContentFragment extends Fragment implements View.OnClickListener {

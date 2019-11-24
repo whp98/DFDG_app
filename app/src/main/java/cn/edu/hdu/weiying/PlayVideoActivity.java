@@ -1,4 +1,4 @@
-package xyz.intellij.fragment;
+package cn.edu.hdu.weiying;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+
+import cn.edu.hdu.weiying.R;
 
 public class PlayVideoActivity extends FragmentActivity {
 

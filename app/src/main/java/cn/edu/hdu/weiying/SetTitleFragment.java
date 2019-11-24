@@ -1,4 +1,4 @@
-package xyz.intellij.fragment;
+package cn.edu.hdu.weiying;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import java.util.List;
+
+import cn.edu.hdu.weiying.R;
 
 public class SetTitleFragment extends Fragment {
     private View view;

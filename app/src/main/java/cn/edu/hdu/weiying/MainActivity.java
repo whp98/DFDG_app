@@ -1,4 +1,4 @@
-package xyz.intellij.fragment;
+package cn.edu.hdu.weiying;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentActivity;
@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.edu.hdu.weiying.R;
 
 public class MainActivity extends FragmentActivity {
 

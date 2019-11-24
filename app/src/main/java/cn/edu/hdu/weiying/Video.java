@@ -1,4 +1,4 @@
-package xyz.intellij.fragment;
+package cn.edu.hdu.weiying;
 
 import java.io.Serializable;
 
